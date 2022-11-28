@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewData["Title"] = "Hot Desc";
+}
+
+<div class="text-center">
+    <p class="display-6 m-5">Choose yourself from the list:</p>
+
+    <form class="text-center" asp-controller="HotDesc" asp-action="DateReservation">
+        <div class="text-center">
+            <select name="employeeId" class="form-select-lg w-50 text-center">
+                <option selected>-- Select --</option>
+                @foreach (var item in ViewBag.Employees)
+                {
+                    <option value="@item.EmployeeId">@item.FirstName @item.LastName</option>
+                }
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary px-3 py-2 my-4">Go to the workplace reservation -></button>
+    </form>
+    <p class="display-6 mt-5">You're not on the list?</p>
+    <a type="button" class="btn btn-primary px-3" asp-controller="Employees" asp-action="Create">Create an account</a>
+</div>

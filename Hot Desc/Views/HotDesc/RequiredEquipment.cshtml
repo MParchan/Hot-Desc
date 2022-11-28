@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Hot_Desc.Models.Equipment>
+
+@{
+    ViewData["Title"] = "Hot Desc";
+}
+
+<div class="text-center">
+    <p class="display-6 m-4">Choose the equipment you need:</p>
+    <form asp-controller="HotDesc" asp-action="AvailableWorkplaces">
+        <input name="timeFrom" type="hidden" value="@ViewBag.TimeFrom" />
+        <input name="timeTo" type="hidden" value="@ViewBag.TimeTo" />
+        <table class="table">
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    <input name="count" min="0" type="number" value="0" />
+                </td>
+            </tr>
+        }
+        </table>
+        <button type="submit" class="btn btn-primary px-3 py-2 my-4">Check available workplaces</button>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+ }

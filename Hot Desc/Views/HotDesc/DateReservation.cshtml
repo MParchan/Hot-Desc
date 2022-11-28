@@ -1,0 +1,33 @@
+﻿@model Hot_Desc.Models.Reservation
+
+@{
+    ViewData["Title"] = "Hot Desc";
+}
+
+<div class="text-center">
+    <p class="display-6 m-4">Select the start and end date of work:</p>
+
+    <form class="text-center" asp-controller="HotDesc" asp-action="RequiredEquipment">
+        <div class="text-center">
+            <div class="form-group">
+                <label asp-for="TimeFrom" class="control-label"></label>
+                <br />
+                <input asp-for="TimeFrom" id="timeFrom" class="form-control-lg mb-3" />
+                <br />
+                <span asp-validation-for="TimeFrom" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TimeTo" class="control-label"></label>
+                <br />
+                <input asp-for="TimeTo" id="timeTo" class="form-control-lg mb-3" />
+                <br />
+                <span asp-validation-for="TimeTo" class="text-danger"></span>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary px-3 py-2 my-4">Check available workplaces</button>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

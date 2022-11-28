@@ -1,0 +1,43 @@
+﻿@model Hot_Desc.Models.Reservation
+
+@{
+    ViewData["Title"] = "Hot Desc";
+}
+
+<div class="text-center">
+    @if (ViewBag.Workplaces.Count > 0)
+    {
+        <p class="display-6 m-4">Available workplaces on the selected dates with selected equipment:</p>
+        <form class="text-center" asp-controller="HotDesc" asp-action="CreateReservation">
+            <div class="text-center">
+                <input asp-for="EmployeeId" type="hidden" value="@ViewBag.EmployeeId" />
+                <input asp-for="TimeFrom" type="hidden" value="@ViewBag.TimeFrom" />
+                <input asp-for="TimeTo" type="hidden" value="@ViewBag.TimeTo" />
+                <select asp-for="WorkplaceId" class="form-select-lg w-50 text-center">
+                    <option value="" selected>-- Select --</option>
+                    @foreach (var item in ViewBag.Workplaces)
+                    {
+                        <option value="@item.WorkplaceId">Floor: @item.Floor, Room: @item.Room, Table: @item.Table</option>
+                    }
+            </select>
+            <br />
+            <span asp-validation-for="WorkplaceId" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary px-3 py-2 my-4">Reserve a workplace</button>
+        </form>
+    }
+    else
+    {
+        <p class="display-6 m-4">There are no free workplaces on the selected date with selected equipment.</p>
+        <form class="text-center" asp-controller="HotDesc" asp-action="DateReservation">
+                <input name="employeeId" type="hidden" value="@ViewBag.EmployeeId" />
+            <button type="submit" class="btn btn-primary px-3 py-2 my-4">Choose another date</button>
+        </form>
+    }
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
