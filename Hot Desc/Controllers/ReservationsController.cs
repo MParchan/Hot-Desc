@@ -21,7 +21,19 @@ namespace Hot_Desc.Controllers
      
         public IActionResult Index()
         {
-            return View(_service.CurrentReservations());
+            ViewBag.Employees = _service.GetEmployees();
+            return View(_service.CurrentReservations(null));
+        }
+        [HttpGet]
+        public IActionResult Index(int? employeeId)
+        {
+            if(employeeId != null)
+            {
+                var employee = _service.GetEmployee((int)employeeId);
+                ViewBag.Employee = employee.FirstName + " " + employee.LastName;
+            }
+            ViewBag.Employees = _service.GetEmployees();
+            return View(_service.CurrentReservations(employeeId));
         }
 
     }

@@ -1,11 +1,29 @@
 ﻿@model IEnumerable<Hot_Desc.Models.Reservation>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Reservations";
 }
+
+<form class="text-center" method="get" asp-controller="Reservations" asp-action="Index">
+    <div class="text-center">
+        <p class="display-6">Choose employee</p>
+        <select name="employeeId" class="form-select-lg w-50 text-center">
+            <option value="" selected>-- Select --</option>
+            @foreach (var item in ViewBag.Employees)
+            {
+                <option value="@item.EmployeeId">@item.FirstName @item.LastName</option>
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary px-3 py-2 my-4">Check reserrvations</button>
+</form>
 
 <div class="text-center">
     <p class="display-6">List of reservations</p>
+    @if (ViewBag.Employee != null)
+    {
+        <p class="display-6">@ViewBag.Employee</p>
+    }
 </div>
 
 
