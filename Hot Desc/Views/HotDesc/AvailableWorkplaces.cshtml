@@ -34,6 +34,11 @@
             <button type="submit" class="btn btn-primary px-3 py-2 my-4">Choose another date</button>
         </form>
     }
+    <form class="text-center" asp-controller="HotDesc" asp-action="RequiredEquipment">
+        <input name="timeFrom" type="hidden" value="@ViewBag.TimeFrom" />
+        <input name="timeTo" type="hidden" value="@ViewBag.TimeTo" />
+        <button type="submit" class="btn btn-primary px-3 py-2 my-4">Change equipment</button>
+    </form>
 </div>
 
 @section Scripts {
